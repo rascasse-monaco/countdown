@@ -26,7 +26,8 @@ function culcToMillisecond(hour, min, sec) {
 
 function culcToTimeDisplay(milsec) {
   return {
-    min: Math.floor(milsec / 60),
+    hour: Math.floor(milsec / 60 / 60),
+    min: Math.floor((milsec / 60) % 60),
     sec: milsec % 60
   }
 }
@@ -34,7 +35,7 @@ function culcToTimeDisplay(milsec) {
 function start() {
   setTime();
   setInterval(() => {
-    document.getElementById('milsec').innerText = `sec=${miliSec} / ${culcToTimeDisplay(miliSec).min}分${culcToTimeDisplay(miliSec).sec}秒`;
+    document.getElementById('milsec').innerText = `sec=${miliSec} / ${culcToTimeDisplay(miliSec).hour}時間${culcToTimeDisplay(miliSec).min}分${culcToTimeDisplay(miliSec).sec}秒`;
     miliSec --;
   }, 1000)
 }
