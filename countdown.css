@@ -16,7 +16,7 @@
   font-size: 1em;
   text-shadow: none;
   height: 30px;
-  width: 70px;
+  width: 355px;
   border-style: none;
   border-radius: 3px;
 }
@@ -26,8 +26,11 @@
   font-size: 1em;
   text-shadow: none;
   height: 10px;
-  width: 50px;
+  width: 45px;
   border-style: none;
   border-radius:3px;
   padding: 10px;
+}
+.numBoxText {
+  font-size: 10px;
 }

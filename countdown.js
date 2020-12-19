@@ -6,6 +6,7 @@ const clock = {
   min: 0,
   sec: 0,
 };
+let interVal = null;
 
 function setTime() {
   clock.hour = parseInt(document.getElementById('hour').value);
@@ -34,9 +35,17 @@ function culcToTimeDisplay(milsec) {
 
 function start() {
   setTime();
-  setInterval(() => {
-    document.getElementById('milsec').innerText = `sec=${miliSec} / ${culcToTimeDisplay(miliSec).hour}時間${culcToTimeDisplay(miliSec).min}分${culcToTimeDisplay(miliSec).sec}秒`;
+  interVal = setInterval(() => {
+    document.getElementById('milsec').innerText =
+    `sec=${miliSec} / ${culcToTimeDisplay(miliSec).hour}:${culcToTimeDisplay(miliSec).min}:${culcToTimeDisplay(miliSec).sec}秒`;
     miliSec --;
+    if (miliSec === -1) {
+      stop();
+    }
   }, 1000)
+}
+
+function stop() {
+  clearInterval(interVal);
 }
 
