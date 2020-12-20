@@ -43,9 +43,9 @@ function start() {
   interVal = setInterval(() => {
     miliSec --;
     document.getElementById('milsec').innerText =
-    `sec=${miliSec} / ${culcToTimeDisplay(miliSec).hour}:${culcToTimeDisplay(miliSec).min}:${culcToTimeDisplay(miliSec).sec}秒`;
+    `sec=${miliSec}/${culcToTimeDisplay(miliSec).hour}:${culcToTimeDisplay(miliSec).min}:${culcToTimeDisplay(miliSec).sec}秒`;
   
-    if (miliSec === -1) {
+    if (miliSec === 0) {
       stop();
     }
   }, 1000)
