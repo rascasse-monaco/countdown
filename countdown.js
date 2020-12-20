@@ -8,12 +8,18 @@ const clock = {
 };
 let interVal = null;
 
-function setTime() {
+function getTime() {
   clock.hour = parseInt(document.getElementById('hour').value);
   clock.min = parseInt(document.getElementById('min').value);
   clock.sec = parseInt(document.getElementById('sec').value);
   console.log(`hour: ${clock.hour} / min: ${clock.min} / sec: ${clock.sec}`);
-  miliSec = culcToMillisecond(clock.hour, clock.min, clock.sec);
+  miliSec = culcToMillisecond(clock.hour, clock.min, clock.sec)
+}
+
+function setTimer() {
+  getTime();
+  document.getElementById('milsec').innerText =
+  `sec=${miliSec} / ${culcToTimeDisplay(miliSec).hour}:${culcToTimeDisplay(miliSec).min}:${culcToTimeDisplay(miliSec).sec}秒`;
 }
 
 function culcToMillisecond(hour, min, sec) {
@@ -34,11 +40,11 @@ function culcToTimeDisplay(milsec) {
 }
 
 function start() {
-  setTime();
   interVal = setInterval(() => {
+    miliSec --;
     document.getElementById('milsec').innerText =
     `sec=${miliSec} / ${culcToTimeDisplay(miliSec).hour}:${culcToTimeDisplay(miliSec).min}:${culcToTimeDisplay(miliSec).sec}秒`;
-    miliSec --;
+  
     if (miliSec === -1) {
       stop();
     }
