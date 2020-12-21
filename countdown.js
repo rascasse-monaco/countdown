@@ -44,8 +44,7 @@ function start() {
     miliSec --;
     document.getElementById('milsec').innerText =
     `sec=${miliSec}/${culcToTimeDisplay(miliSec).hour}:${culcToTimeDisplay(miliSec).min}:${culcToTimeDisplay(miliSec).sec}秒`;
-  
-    if (miliSec === 0) {
+      if (miliSec === 0) {
       stop();
     }
   }, 1000)
@@ -53,5 +52,9 @@ function start() {
 
 function stop() {
   clearInterval(interVal);
+}
+
+function reload() {
+  location.reload();
 }
 
