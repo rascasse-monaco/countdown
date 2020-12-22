@@ -37,3 +37,15 @@
 #milsec {
   font-size: 20px;
 }
+#pause {
+  background-color: rgb(33, 62, 131);
+}
+#reset {
+  background-color:  rgb(189, 89, 64);
+}
+#set {
+  background-color:  rgb(75, 75, 75);
+}
+#timeArea {
+  font-size: 35px;
+}

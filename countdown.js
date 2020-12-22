@@ -5,6 +5,7 @@ const clock = {
   hour: 0,
   min: 0,
   sec: 0,
+  switch: 0 // ボタン制御用変数、0の時set可能、1の時start、2の時pause、それぞれ可能
 };
 let interVal = null;
 
@@ -17,9 +18,12 @@ function getTime() {
 }
 
 function setTimer() {
+  if (clock.switch === 0) {
+  clock.switch = 1;
   getTime();
-  document.getElementById('milsec').innerText =
-  `sec=${miliSec}/${toDoubleDigits(culcToTimeDisplay(miliSec).hour)}:${toDoubleDigits(culcToTimeDisplay(miliSec).min)}:${toDoubleDigits(culcToTimeDisplay(miliSec).sec)}秒`;
+  document.getElementById('timeArea').innerText =
+  `${toDoubleDigits(culcToTimeDisplay(miliSec).hour)}:${toDoubleDigits(culcToTimeDisplay(miliSec).min)}:${toDoubleDigits(culcToTimeDisplay(miliSec).sec)}秒`;
+  }
 }
 
 function culcToMillisecond(hour, min, sec) {
@@ -40,18 +44,27 @@ function culcToTimeDisplay(milsec) {
 }
 
 function start() {
-  interVal = setInterval(() => {
-    miliSec --;
-    document.getElementById('milsec').innerText =
-    `sec=${miliSec}/${toDoubleDigits(culcToTimeDisplay(miliSec).hour)}:${toDoubleDigits(culcToTimeDisplay(miliSec).min)}:${toDoubleDigits(culcToTimeDisplay(miliSec).sec)}秒`;
-      if (miliSec === 0) {
-      stop();
-    }
-  }, 1000)
+  if (clock.switch === 1) {
+    clock.switch = 2;
+    interVal = setInterval(() => {
+      miliSec --;
+      document.getElementById('timeArea').innerText =
+      `${toDoubleDigits(culcToTimeDisplay(miliSec).hour)}:${toDoubleDigits(culcToTimeDisplay(miliSec).min)}:${toDoubleDigits  (culcToTimeDisplay(miliSec).sec)}秒`;
+        if (miliSec === 0) {
+        pause();
+      }
+    }, 1000);
+  }
 }
 
-function stop() {
-  clearInterval(interVal);
+function pause() {
+  if (clock.switch === 2 && miliSec > 0) {
+    clock.switch = 1;
+    clearInterval(interVal);
+  } else {
+    clock.switch = 0;
+    clearInterval(interVal);
+  }
 }
 
 function reload() {
