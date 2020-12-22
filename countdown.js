@@ -19,7 +19,7 @@ function getTime() {
 function setTimer() {
   getTime();
   document.getElementById('milsec').innerText =
-  `sec=${miliSec} / ${culcToTimeDisplay(miliSec).hour}:${culcToTimeDisplay(miliSec).min}:${culcToTimeDisplay(miliSec).sec}秒`;
+  `sec=${miliSec}/${toDoubleDigits(culcToTimeDisplay(miliSec).hour)}:${toDoubleDigits(culcToTimeDisplay(miliSec).min)}:${toDoubleDigits(culcToTimeDisplay(miliSec).sec)}秒`;
 }
 
 function culcToMillisecond(hour, min, sec) {
@@ -43,7 +43,7 @@ function start() {
   interVal = setInterval(() => {
     miliSec --;
     document.getElementById('milsec').innerText =
-    `sec=${miliSec}/${culcToTimeDisplay(miliSec).hour}:${culcToTimeDisplay(miliSec).min}:${culcToTimeDisplay(miliSec).sec}秒`;
+    `sec=${miliSec}/${toDoubleDigits(culcToTimeDisplay(miliSec).hour)}:${toDoubleDigits(culcToTimeDisplay(miliSec).min)}:${toDoubleDigits(culcToTimeDisplay(miliSec).sec)}秒`;
       if (miliSec === 0) {
       stop();
     }
@@ -56,5 +56,19 @@ function stop() {
 
 function reload() {
   location.reload();
+}
+
+/**
+ * 10の位に0を挿入して数字の桁数を合わせる
+ * @return {String} 0を足した文字列
+ * @param {Number} num 秒、分など
+ */
+function toDoubleDigits(num){
+  num += '';
+  if (num.length === 1) {
+    return num = `0${num}`;
+  } else {
+    return num;
+  }
 }
 
