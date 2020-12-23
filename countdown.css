@@ -12,11 +12,9 @@
 }
 .button {
   color: #fff;
-  background-color: rgb(64, 101, 189);
   font-size: 12px;
   text-shadow: none;
   height: 30px;
-  width: 82px;
   border-style: none;
   border-radius: 3px;
 }
@@ -36,25 +34,38 @@
 .numBoxText {
   font-size: 10px;
 }
+#jpText {
+  font-family: "Hiragino Sans","ヒラギノ角ゴシック";
+  font-weight: 700;
+  font-size: 20px;
+}
 #body {
   margin: 5px;
 }
 #milsec {
   font-size: 20px;
 }
+#start {
+  background-color:  rgb(33, 62, 131);
+  width: 164px;
+  margin-right: 4px;
+}
+
 #pause {
-  background-color: rgb(33, 62, 131);
+  background-color: rgb(119, 119, 119);
+  width: 74px;
+  margin-right: 4px;
 }
 #reset {
   background-color:  rgb(189, 89, 64);
-  width: 80px;
+  width: 74px;
 }
 #set {
   background-color:  rgb(75, 75, 75);
-  width: 230px;
+  width: 320px;
   margin-right: 5px;
 }
 #timeArea {
-  font-size: 35px;
+  font-size: 37px;
   margin-left: 5px;
 }

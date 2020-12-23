@@ -9,11 +9,11 @@
   </head>
 <body>
     <div id="body">
-      <div id="timeArea">00:00:00秒</div>
+      <span id="timeArea">00:00:00</span><span id="jpText">秒</span>
       <div id="settingArea">
         <input type="number" class="numBox" id="hour" min="0" max="24" value="0"><span class="numBoxText" >hr.</span><input   type="number" class="numBox" id="min" min="0" max="59" value="0"><span class="numBoxText" >min.</span><input type="number"  class="numBox" id="sec" min="0" max="59" value="0"><span class="numBoxText" >sec.</span>
       </div>
-      <input type="button" class="button" id="set" onclick="setTimer()" value="Set"><input type="button" class="button" id="reset"  onclick="reload()" value="Reset">
+      <div id="buttonArea"><input type="button" class="button" id="set" onclick="setTimer();replaceButton();" value="Set"></div>
     </div>
     <script src="countdown.js"></script>
   </body>
