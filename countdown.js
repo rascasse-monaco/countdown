@@ -56,6 +56,7 @@ function start() {
       document.getElementById('timeArea').innerText =
       `${toDoubleDigits(culcToTimeDisplay(countNum).hour)}:${toDoubleDigits(culcToTimeDisplay(countNum).min)}:${toDoubleDigits  (culcToTimeDisplay(countNum).sec)}`;
         if (countNum === 0) {
+        alarm();//アラーム音
         pause();
       }
     }, 1000);
@@ -119,4 +120,8 @@ function toDoubleDigits(num){
     return num;
   }
 }
-
+//アラーム鳴らす関数
+function alarm() {
+  const audio = document.getElementById('alarm');
+  audio.play();
+}
