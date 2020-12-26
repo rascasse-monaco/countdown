@@ -1,27 +1,27 @@
 'use strict'
 
 let countNum = 0;
-const clock = {
-  hour: 0,
-  min: 0,
-  sec: 0,
-  switch: 0 // ボタン制御用変数、0の時set可能、1の時start、2の時pause、それぞれ可能
-};
-let interVal = null;
+let switchTrgNum = 0;// ボタン制御用変数、0の時set可能、1の時start、2の時pause、それぞれ可能
+let interVal = null;// setInterval代入用
 
 //フォームから時間を取得、数値に変換しcountNumに代入
 function getTime() {
-  clock.hour = parseInt(document.getElementById('hour').value);
-  clock.min = parseInt(document.getElementById('min').value);
-  clock.sec = parseInt(document.getElementById('sec').value);
-  countNum = culcToSecond(clock.hour, clock.min, clock.sec)
+  const time = {
+    hour: 0,
+    min: 0,
+    sec: 0,
+  };
+  time.hour = parseInt(document.getElementById('hour').value);
+  time.min = parseInt(document.getElementById('min').value);
+  time.sec = parseInt(document.getElementById('sec').value);
+  countNum = culcToSecond(time.hour, time.min, time.sec);
 }
 
 //時間設定&ボタン置き換え実行用関数
 function setTimer() {  
   getTime();
-  if (clock.switch === 0 && countNum > 0) {
-    clock.switch = 1;    
+  if (switchTrgNum === 0 && countNum > 0) {
+    switchTrgNum = 1;    
     document.getElementById('timeArea').innerText =
     `${toDoubleDigits(culcToTimeDisplay(countNum).hour)}:${toDoubleDigits(culcToTimeDisplay (countNum).min)}:${toDoubleDigits(culcToTimeDisplay(countNum).sec)}`;
     replaceSetButton();
@@ -50,13 +50,17 @@ function culcToTimeDisplay(Num) {
 }
 //カウントダウン実行関数
 function start() {
-  if (clock.switch === 1) {
-    clock.switch = 2;
+  if (switchTrgNum === 1) {
+    switchTrgNum = 2;
     interVal = setInterval(() => {
       countNum --;
       document.getElementById('timeArea').innerText =
       `${toDoubleDigits(culcToTimeDisplay(countNum).hour)}:${toDoubleDigits(culcToTimeDisplay(countNum).min)}:${toDoubleDigits  (culcToTimeDisplay(countNum).sec)}`;
         if (countNum === 0) {
+        removeAllChildren('settingArea');
+        createBtn('settingArea', 'alarmStop', 'mute()', 'Alarm Stop')
+        removeAllChildren('buttonArea');
+        createBtn('buttonArea', 'set', 'reload()', 'Reset Timer')
         alarm();//アラーム音
         pause();
       }
@@ -65,11 +69,11 @@ function start() {
 }
 //一時停止
 function pause() {
-  if (clock.switch === 2 && countNum > 0) {
-    clock.switch = 1;
+  if (switchTrgNum === 2 && countNum > 0) {
+    switchTrgNum = 1;
     clearInterval(interVal);
   } else {
-    clock.switch = 0;
+    switchTrgNum = 0;
     clearInterval(interVal);
   }
 }
@@ -107,6 +111,33 @@ function replaceSetButton() {
   buttonAreaID.appendChild(pauseButton);
   buttonAreaID.appendChild(resetButton);
 }
+/**
+ * 子要素をまとめて削除する
+ * @param {String} id 'parentID'
+ */
+function removeAllChildren(id) {
+  const element = document.getElementById(`${id}`);
+  while (element.firstChild) {
+    element.removeChild(element.firstChild);
+  }
+}
+/**
+ * 子要素をまとめて削除する
+ * @param {String} parentAreaID 'parentAreaID' 親要素のID
+ * @param {String} id 'id' ボタンのID
+ * @param {String} funcName 'funcName' ボタンが呼びたしたい関数名
+ * @param {String} value 'value' ボタンに表示するテキスト
+ */
+function createBtn(parentAreaID, id, funcName, value) {
+  const areaID = document.getElementById(`${parentAreaID}`);
+  const button = document.createElement('input');
+        button.setAttribute('type', 'button');
+        button.setAttribute('class', 'button');
+        button.setAttribute('id', `${id}`);
+        button.setAttribute('onclick', `${funcName}`);
+        button.setAttribute('value', `${value}`);
+  areaID.appendChild(button);
+}
 
 /**
  * 10の位に0を挿入して数字の桁数を合わせる
@@ -125,4 +156,9 @@ function toDoubleDigits(num){
 function alarm() {
   const audio = document.getElementById('alarm');
   audio.play();
+}
+
+function mute() {
+  const audio = document.getElementById('alarm');
+  audio.pause();
 }

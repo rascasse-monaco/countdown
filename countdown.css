@@ -69,3 +69,9 @@
   font-size: 37px;
   margin-left: 5px;
 }
+
+#alarmStop {
+  background-color:  rgb(189, 89, 64);
+  width: 320px;
+  margin-bottom: 5px;
+}
