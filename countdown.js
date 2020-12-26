@@ -17,7 +17,7 @@ function getTime() {
   countNum = culcToSecond(clock.hour, clock.min, clock.sec)
 }
 
-//時間設定用関数
+//時間設定&ボタン置き換え実行用関数
 function setTimer() {  
   getTime();
   if (clock.switch === 0 && countNum > 0) {
