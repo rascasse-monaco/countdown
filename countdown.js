@@ -18,13 +18,14 @@ function getTime() {
 }
 
 //時間設定用関数
-function setTimer() {
-  if (clock.switch === 0) {
-  clock.switch = 1;
+function setTimer() {  
   getTime();
-  document.getElementById('timeArea').innerText =
-  `${toDoubleDigits(culcToTimeDisplay(countNum).hour)}:${toDoubleDigits(culcToTimeDisplay(countNum).min)}:${toDoubleDigits(culcToTimeDisplay(countNum).sec)}`;
-  }
+  if (clock.switch === 0 && countNum > 0) {
+    clock.switch = 1;    
+    document.getElementById('timeArea').innerText =
+    `${toDoubleDigits(culcToTimeDisplay(countNum).hour)}:${toDoubleDigits(culcToTimeDisplay (countNum).min)}:${toDoubleDigits(culcToTimeDisplay(countNum).sec)}`;
+    replaceSetButton();
+    }
 }
 /**
  * 時、分、秒を秒に変換
@@ -77,7 +78,7 @@ function reload() {
   location.reload();
 }
 //セットボタンをおしたら表示を変更する。
-function replaceButton() {
+function replaceSetButton() {
   const setButtonID = document.getElementById('set');
   const buttonAreaID = document.getElementById('buttonArea');
 
