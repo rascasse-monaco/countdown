@@ -7,7 +7,6 @@
   black 2px 2px , black -2px 2px,	black 2px -2px, black -2px -2px,
   black 1px 2px,  black -1px 2px,	black 1px -2px, black -1px -2px,
   black 2px 1px,  black -2px 1px,	black 2px -1px, black -2px -1px;
-  line-height: 1;
   margin: 0px;
 }
 .button {
@@ -47,18 +46,18 @@
 }
 #start {
   background-color: rgb(64, 101, 189);
-  width: 164px;
-  margin-right: 4px;
+  width: 320px;
+  margin-bottom: 5px;
 }
 
 #pause {
   background-color: rgb(119, 119, 119);
-  width: 74px;
+  width: 158px;
   margin-right: 4px;
 }
 #reset {
   background-color:  rgb(189, 89, 64);
-  width: 74px;
+  width: 158px;
 }
 #set {
   background-color:  rgb(75, 75, 75);
@@ -74,4 +73,10 @@
   background-color:  rgb(189, 89, 64);
   width: 320px;
   margin-bottom: 5px;
+}
+
+i {
+  font-weight: normal;
+  text-shadow: none;
+  vertical-align:text-bottom;
 }

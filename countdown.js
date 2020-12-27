@@ -21,7 +21,10 @@ function getTime() {
 function setTimer() {  
   getTime();
   if (switchTrgNum === 0 && countNum > 0) {
-    switchTrgNum = 1;    
+    switchTrgNum = 1;  
+    removeAllChildren('settingArea');
+    removeAllChildren('buttonArea');
+    createBtn('settingArea', 'start', 'start()', '<i class="fas fa-play"></i> Start');  
     document.getElementById('timeArea').innerText =
     `${toDoubleDigits(culcToTimeDisplay(countNum).hour)}:${toDoubleDigits(culcToTimeDisplay (countNum).min)}:${toDoubleDigits(culcToTimeDisplay(countNum).sec)}`;
     replaceSetButton();
@@ -58,9 +61,9 @@ function start() {
       `${toDoubleDigits(culcToTimeDisplay(countNum).hour)}:${toDoubleDigits(culcToTimeDisplay(countNum).min)}:${toDoubleDigits  (culcToTimeDisplay(countNum).sec)}`;
         if (countNum === 0) {
         removeAllChildren('settingArea');
-        createBtn('settingArea', 'alarmStop', 'mute()', 'Alarm Stop')
+        createBtn('settingArea', 'alarmStop', 'mute()', '<i class="fas fa-volume-mute"></i> Alarm Stop')
         removeAllChildren('buttonArea');
-        createBtn('buttonArea', 'set', 'reload()', 'Reset Timer')
+        createBtn('buttonArea', 'set', 'reload()', '<i class="fas fa-clock"></i> Set Timer Again')
         alarm();//アラーム音
         pause();
       }
@@ -83,33 +86,25 @@ function reload() {
 }
 //セットボタンをおしたら表示を変更する。
 function replaceSetButton() {
-  const setButtonID = document.getElementById('set');
   const buttonAreaID = document.getElementById('buttonArea');
-
-  const startButton = document.createElement('input');
-        startButton.setAttribute('type', 'button');
-        startButton.setAttribute('class', 'button');
-        startButton.setAttribute('id', 'start');
-        startButton.setAttribute('onclick', 'start()');
-        startButton.setAttribute('value', 'Start');
-
-  const pauseButton = document.createElement('input');
+  //Pauseを表示。
+  const pauseButton = document.createElement('button');
         pauseButton.setAttribute('type', 'button');
         pauseButton.setAttribute('class', 'button');
         pauseButton.setAttribute('id', 'pause');
         pauseButton.setAttribute('onclick', 'pause()');
-        pauseButton.setAttribute('value', 'Pause');
-
-  const resetButton = document.createElement('input');
+  //Resetを表示。
+  const resetButton = document.createElement('button');
         resetButton.setAttribute('type', 'button');
         resetButton.setAttribute('class', 'button');
         resetButton.setAttribute('id', 'reset');
         resetButton.setAttribute('onclick', 'reload()');
         resetButton.setAttribute('value', 'Reset');
 
-  buttonAreaID.replaceChild(startButton, setButtonID);
-  buttonAreaID.appendChild(pauseButton);
+  buttonAreaID.appendChild(pauseButton)
+  pauseButton.innerHTML = '<i class="fas fa-pause"></i> Pause'
   buttonAreaID.appendChild(resetButton);
+  resetButton.innerHTML = '<i class="fas fa-redo"></i> Reset'
 }
 /**
  * 子要素をまとめて削除する
@@ -128,15 +123,19 @@ function removeAllChildren(id) {
  * @param {String} funcName 'funcName' ボタンが呼びたしたい関数名
  * @param {String} value 'value' ボタンに表示するテキスト
  */
-function createBtn(parentAreaID, id, funcName, value) {
+function createBtn(parentAreaID, id, funcName, innerHTML) {
   const areaID = document.getElementById(`${parentAreaID}`);
-  const button = document.createElement('input');
+  const button = document.createElement('button');
         button.setAttribute('type', 'button');
         button.setAttribute('class', 'button');
         button.setAttribute('id', `${id}`);
         button.setAttribute('onclick', `${funcName}`);
-        button.setAttribute('value', `${value}`);
+        
   areaID.appendChild(button);
+
+  if (innerHTML) {
+    button.innerHTML = innerHTML;
+  }
 }
 
 /**
