@@ -50,29 +50,36 @@
   margin-bottom: 5px;
 }
 
+#startShort {
+  background-color: rgb(64, 101, 189);
+  width: 208px;
+  margin-right: 4px;
+}
+
 #pause {
   background-color: rgb(119, 119, 119);
-  width: 158px;
+  width: 208px;
   margin-right: 4px;
 }
 #reset {
   background-color:  rgb(189, 89, 64);
-  width: 158px;
+  width: 108px;
 }
 #set {
   background-color:  rgb(75, 75, 75);
   width: 320px;
   margin-right: 5px;
 }
+
 #timeArea {
   font-size: 37px;
   margin-left: 5px;
 }
 
 #alarmStop {
-  background-color:  rgb(189, 89, 64);
-  width: 320px;
-  margin-bottom: 5px;
+  background-color:  rgb(224, 136, 20);
+  width: 208px;
+  margin-right: 4px;
 }
 
 i {
