@@ -70,7 +70,7 @@ function start() {
     }, 1000);
   }
 }
-//一時停止
+//タイマー一時停止関数
 function pause() {
   if (switchTrgNum === 2 && countNum > 0) {
     switchTrgNum = 1;
@@ -156,8 +156,13 @@ function alarm() {
   const audio = document.getElementById('alarm');
   audio.play();
 }
-
+//アラーム止める関数
 function mute() {
   const audio = document.getElementById('alarm');
   audio.pause();
+}
+
+function switchNum(num) {
+  const switchNum = num;
+  return switchNum;
 }
