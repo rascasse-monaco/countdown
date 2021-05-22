@@ -1,49 +1,41 @@
 'use strict';
-//フォームから時間を取得、数値に変換しcountNumに代入
-function getTime() {
-  const time = {
+//フォームから時間を取得
+function getTimeSetting() {
+  const timeValue = {
     hour: 0,
     min: 0,
     sec: 0,
   };
-  time.hour = parseInt(document.getElementById('hour').value);
-  time.min = parseInt(document.getElementById('min').value);
-  time.sec = parseInt(document.getElementById('sec').value);
-  return culcToSecond(time.hour, time.min, time.sec);
+  timeValue.hour = parseInt(document.getElementById('hour').value);
+  timeValue.min = parseInt(document.getElementById('min').value);
+  timeValue.sec = parseInt(document.getElementById('sec').value);
+  return culcToSecond(timeValue.hour, timeValue.min, timeValue.sec);
 }
 /**
- * 時、分、秒を秒に変換
+ * 時、分、秒を秒に変換して合計の秒数を返す
  * @return {Number} 合計の秒数
  * @param {Number} 秒、分、時など
  */
 function culcToSecond(hour, min, sec) {
-  const inputNum = {
+  const value = {
     sec: sec,
     min: min * 60,
     hour: hour * 60 * 60
   };
-  return (inputNum.sec + inputNum.min + inputNum.hour)
+  return (value.sec + value.min + value.hour)
+}
+
+// 値を受け取って値を文字列にしてかえす。返す値がひと桁の場合は十の位に0を入れる。
+function formatDisplay(value) {
+  return Math.floor(value).toString().padStart(2, '0');
 }
 //秒を時、分、秒の表記に変換
-function culcToTimeDisplay(Num) {
+function culcToTime(count) {
   return {
-    hour: Math.floor(Num / 60 / 60),
-    min: Math.floor((Num / 60) % 60),
-    sec: Num % 60
-  }
-}
-/**
- * 10の位に0を挿入して数字の桁数を合わせる
- * @return {String} 0を足した文字列
- * @param {Number} num 秒、分など
- */
-function toDoubleDigits(num){
-  num += '';
-  if (num.length === 1) {
-    return num = `0${num}`;
-  } else {
-    return num;
+    hour: formatDisplay(count / 60 / 60),
+    min: formatDisplay((count / 60) % 60),
+    sec: (count % 60).toString().padStart(2, '0')
   }
 }
 
-export { getTime, culcToSecond, culcToTimeDisplay, toDoubleDigits };
+export { getTimeSetting, culcToSecond, culcToTime };
